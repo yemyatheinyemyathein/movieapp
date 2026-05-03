@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    /* Manual hex for bg-dark-900 */
+    @apply bg-[#0a0a0f] text-white; 
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom scrollbar using direct hex codes */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f0f1a; /* dark-800 */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2e2e50; /* dark-400 */
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ea580c; /* brand-600 */
+  }
+}
+
+@layer components {
+  /* Skeleton loading shimmer using direct hex */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #14141f 25%, /* dark-700 */
+      #1a1a2e 50%, /* dark-600 */
+      #14141f 75%  /* dark-700 */
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .movie-card-glow:hover {
+    box-shadow: 0 0 30px rgba(249, 115, 22, 0.2);
+  }
+
+  .glass {
+    background: rgba(15, 15, 26, 0.8);
+    backdrop-filter: blur(12px);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #f97316, #fb923c, #fcd34d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Input styles using arbitrary values */
+  .input-field {
+    @apply w-full bg-[#1a1a2e] border border-[#2e2e50] text-white rounded-lg px-4 py-3
+           placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f97316]
+           focus:border-transparent transition-all duration-200;
+  }
+
+  /* Button variants using arbitrary values */
+  .btn-primary {
+    @apply bg-[#f97316] hover:bg-[#ea580c] text-white font-semibold py-3 px-6 rounded-lg
+           transition-all duration-200 active:scale-95;
+  }
+
+  .btn-secondary {
+    /* This was causing your error - now using manual hex #3f3f66 */
+    @apply bg-[#252540] hover:bg-[#2e2e50] text-white font-semibold py-3 px-6 rounded-lg
+           border border-[#3f3f66] transition-all duration-200 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-gray-400 hover:text-white hover:bg-[#1a1a2e] py-2 px-4 rounded-lg
+           transition-all duration-200;
+  }
+}
+
+/* Define Keyframes manually since we aren't using the config */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-enter {
+  animation: fadeIn 0.3s ease-in-out;
+}
